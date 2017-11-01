@@ -52,8 +52,8 @@
             <slot></slot>
         </div>
         <div class="rd-swipe-pagination" v-if="options.pagination">
-            <div class="rd-swipe-pagination-item" 
-                :class="{ 'active': item.active }" 
+            <div class="rd-swipe-pagination-item"
+                :class="{ 'active': item.active }"
                 v-for="(item, index) in pagination"
                 @click="turnTo(index)"
             ></div>
@@ -80,7 +80,10 @@ export default {
             default () {
                 return {}
             }
-        }
+        },
+        fetched: {
+            type: Boolean,
+        },
     },
     data () {
         return {
@@ -125,7 +128,7 @@ export default {
                     '-webkit-transition': 'all .3s',
                 }
             }
-            
+
         }
     },
     mounted () {
@@ -244,6 +247,13 @@ export default {
             }
             if (this.position.x < 0) {
                 this.position.x = 0
+            }
+        }
+    },
+    watch: {
+        fetched (val) {
+            if(val === true) {
+                this.init()
             }
         }
     }
